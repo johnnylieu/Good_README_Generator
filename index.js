@@ -95,9 +95,8 @@ inquirer
             name: 'email',
             message: 'What is your email address?'
         }
-    ]);
-
-.then(function (answers) {
+    ])
+    .then(function (answers) {
         return getReadMeOutput(answers);
     })
     .then(function (htmlOutput) {
