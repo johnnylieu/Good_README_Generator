@@ -1,5 +1,54 @@
-const inquirer = require('inquirer');
 const fs = require('fs');
+const util = require('util');
+const inquirer = require('inquirer');
+const thenableWriteFile = util.promisify(fs.writeFile);
+
+// global function to call later
+function getReadMeOutput(answers) {
+    const title = answers.title;
+    const description = answers.description;
+    const installation = answers.installation;
+    const usage = answers.usage;
+    const contribution = answers.contribution;
+    const testInstructions = answers.testInstructions;
+    const listOfLicense = answers.listOfLicense;
+    const githubUserName = answers.githubUserName;
+    const email = answers.email;
+
+    return `# ${title}
+# Description
+${description}
+
+# Table of Contents
+* [Installation](#installation)
+* [Usage](#usage)
+* [License](#license)
+* [Contributing](#Contributing)
+* [Tests](#tests)
+* [Questions](#questions)
+
+## Installation
+${installation}
+
+## Usage
+${usage}
+
+## License
+${listOfLicense}
+
+## Contributing
+${contribution}
+
+## Tests Instructions
+${testInstructions}
+
+## Questions
+If you have any questions, please send an email to ${email}.
+GitHub.com/${githubUserName}
+`
+};
+
+// questions to ask
 inquirer
     .prompt([{
             type: 'input',
@@ -46,57 +95,30 @@ inquirer
             name: 'email',
             message: 'What is your email address?'
         }
-    ])
-    .then(function (answers) {
-        console.log(answers);
-        fs.writeFile('README.md', JSON.stringify(answers, null, 4), function () {
-            console.log('File has been written');
-        });
+    ]);
+
+.then(function (answers) {
+        return getReadMeOutput(answers);
+    })
+    .then(function (htmlOutput) {
+        return thenableWriteFile('./README.md', readMeOutput);
+    })
+    .then(function () {
+        console.log('All done!');
+    })
+    .catch(function (error) {
+        console.log('Oh noes! An error!', error);
     });
 
-.then(function readmeOutput(answers) {
-    const title = answers.title;
-    const description = answers.description;
-    const installation = answers.installation;
-    const usage = answers.usage;
-    const contribution = answers.contribution;
-    const testInstructions = answers.testInstructions;
-    const listOfLicense = answers.listOfLicense;
-    const githubUserName = answers.githubUserName;
-    const email = answers.email;
 
-    return `# ${title}
-# Description
-${description}
 
-# Table of Contents
-* [Installation](#installation)
-* [Usage](#usage)
-* [License](#license)
-* [Contributing](#Contributing)
-* [Tests](#tests)
-* [Questions](#questions)
-
-## Installation
-${installation}
-
-## Usage
-${usage}
-
-## License
-${listOfLicense}
-
-## Contributing
-${contribution}
-
-## Tests Instructions
-${testInstructions}
-
-## Questions
-If you have any questions, please send an email to ${email}.
-GitHub.com/${githubUserName}
-`
-}):
+// getting rid of this for now
+// .then(function (answers) {
+//     console.log(answers);
+//     fs.writeFile('README.md', JSON.stringify(answers, null, 4), function () {
+//         console.log('File has been written');
+//     });
+// });
 
 
 // might use some of the below later
