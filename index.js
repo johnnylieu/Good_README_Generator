@@ -14,6 +14,7 @@ function getReadMeOutput(answers) {
     const listOfLicense = answers.listOfLicense;
     const githubUserName = answers.githubUserName;
     const email = answers.email;
+    const name = answers.name;
 
     return `# ${title}
 # Description
@@ -30,21 +31,22 @@ ${description}
 ## Installation
 ${installation}
 
-## Usage
+## 🚀 Usage
 ${usage}
 
-## License
+## 📝 License
 ${listOfLicense}
 
-## Contributing
+## 🤝 Contributing
+👤 ${name}
 ${contribution}
+GitHub.com/${githubUserName}
 
 ## Tests Instructions
 ${testInstructions}
 
 ## Questions
 If you have any questions, please send an email to ${email}.
-GitHub.com/${githubUserName}
 `
 };
 
@@ -54,6 +56,11 @@ inquirer
             type: 'input',
             name: 'tile',
             message: 'What is the title of your project?'
+        },
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is your name?'
         },
         {
             type: 'input',
@@ -99,7 +106,7 @@ inquirer
     .then(function (answers) {
         return getReadMeOutput(answers);
     })
-    .then(function (htmlOutput) {
+    .then(function (readMeOutput) {
         return thenableWriteFile('./README.md', readMeOutput);
     })
     .then(function () {
