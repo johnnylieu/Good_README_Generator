@@ -30,13 +30,13 @@ This program asks the user a series of questions then takes the answers and gene
 
 https://github.com/johnnylieu/Good_README_Generator/commits/master
 
+
 ## Credits
 
-* I want to thank my tutor Bobbi Tarkany for helping me with the finishing touches.
-* Shields.io
-* choosealicense.com
+* shields.io
 * gifmaker.org
-
+* choosealicense.com
+* I want to thank my tutor Bobbi Tarkany for helping me with the finishing touches.
 
 
 ## License
