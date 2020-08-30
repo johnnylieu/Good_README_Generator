@@ -35,6 +35,7 @@ https://github.com/johnnylieu/Good_README_Generator/commits/master
 * I want to thank my tutor Bobbi Tarkany for helping me with the finishing touches.
 * Shields.io
 * choosealicense.com
+* gifmaker.org
 
 
 
