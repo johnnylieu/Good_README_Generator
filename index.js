@@ -16,6 +16,18 @@ function getReadMeOutput(answers) {
     const email = answers.email;
     const name = answers.name;
 
+    var listBadge;
+
+    if (listOfLicense === 'Apache License 2.0') {
+        listBadge = 'https://img.shields.io/badge/Apache%20License%202.0-license-black'
+    } else if (listOfLicense === 'GNU General Public License v3.0'){
+        listBadge = 'https://img.shields.io/badge/GNU%20General%20Public%20License%20v3.0-license-black'
+    } else if (listOfLicense === 'BSD 3-Clause "New" or "Revised" License') {
+        listBadge = 'https://img.shields.io/license/BSD%203--Clause%60-badge-black'
+    } else if (listOfLicense === 'MIT License') {
+        listBadge = 'https://img.shields.io/license/MIT-badge-black'
+    };
+
     return `# ${title}
 # Description
 ${description}
@@ -36,6 +48,7 @@ ${usage}
 
 ## 📝 License
 ${listOfLicense}
+![GitHub badge](${listBadge})
 
 ## 🤝 Contributing
 👤 ${name}
@@ -52,15 +65,16 @@ If you have any questions, please send an email to ${email}.
 
 // questions to ask
 inquirer
-    .prompt([{
-            type: 'input',
-            name: 'tile',
-            message: 'What is the title of your project?'
-        },
+    .prompt([
         {
             type: 'input',
             name: 'name',
             message: 'What is your name?'
+        },
+        {
+            type: 'input',
+            name: 'title',
+            message: 'What is the title of your project?'
         },
         {
             type: 'input',
@@ -88,9 +102,10 @@ inquirer
             message: 'What are the test instructions?'
         },
         {
-            type: 'input',
+            type: 'list',
             name: 'listOfLicense',
-            message: ''
+            choices: ['Apache License 2.0', 'GNU General Public License v3.0', 'MIT License', 'BSD 3-Clause "New" or "Revised" License'],
+            message: 'Which license would you like to choose?'
         },
         {
             type: 'input',
