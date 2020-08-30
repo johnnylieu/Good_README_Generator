@@ -12,9 +12,9 @@
 
 ## Installation
 
-* Download my "Develop" folder in its entirety.
-* Using GitBash, navigate to this folder on your desktop.
-* Use command "code .." in GitBash without the quatations.
+* Download my my files in its entirety.
+* Using your terminal, navigate to this folder on your desktop.
+* Use command "node index.js" in your terminal without the quotations.
 
 ## Summary
 
